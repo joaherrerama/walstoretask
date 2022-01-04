@@ -1,0 +1,22 @@
+versiónversion: '3'
+
+services:
+  db:
+    image: postgres:10.1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    web:
+      build: .
+    	command: python /code/manage.py migrate --noinput
+    	command: python /code/manage.py runserver 0.0.0.0:8000
+    	volumes:
+        	- .:/code
+    	ports:
+        	- "8000:8000"
+    	depends_on:
+        	- db
+    	environment:
+        	- DJANGO_SETTINGS_MODULE=config.settings
+        	- SECRET_KEY=${SECRET_KEY}
+volumes:
+postgres_data:

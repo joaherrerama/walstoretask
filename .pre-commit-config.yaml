@@ -16,4 +16,4 @@ repos:
       - id: flake8
         args: # arguments to configure flake8
           # reading configfile
-          - "--max-line-length=88"
+          - "--max-line-length=110"
