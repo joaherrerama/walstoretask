@@ -12,7 +12,6 @@ on:
     branches: [main]
 
 jobs:
-
   # Cancel duplicate jobs: https://github.com/fkirc/skip-duplicate-actions#option-3-cancellation-only
 
   cancel_duplicates:
@@ -25,7 +24,6 @@ jobs:
     name: Mega-Linter
     runs-on: ubuntu-latest
     steps:
-
       # Git Checkout
 
       - name: Checkout Code
@@ -42,7 +40,6 @@ jobs:
 
         uses: nvuillam/mega-linter@v4
         env:
-
           # All available variables are described in documentation
           # https://nvuillam.github.io/mega-linter/configuration/
 
@@ -52,5 +49,5 @@ jobs:
 
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
 
-          DISABLE_LINTERS: SPELL_CSPELL,PYTHON_ISORT
+          DISABLE_LINTERS: SPELL_CSPELL,PYTHON_ISORT, PYTHON_BANDIT
           DISABLE: DOCKERFILE,BASH,COPYPASTE # Uncomment to disable copy-paste and spell checks

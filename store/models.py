@@ -10,7 +10,7 @@ class Store(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
-    postcode = models.IntegerField(max_length=5)
+    postcode = models.IntegerField()
     coordinate = models.PointField()
 
     class Meta:
