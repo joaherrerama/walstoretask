@@ -1,16 +1,9 @@
-FROM python:3.7-alpine
+FROM python:3.7
 
 # Install GDAL
-RUN apk update && apk upgrade \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-        postgresql-client \
-        postgresql-dev \
-        musl-dev \
-        gcc \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        gdal-dev \
-        geos-dev \
-        proj-dev
+RUN apt-get update -y
+RUN apt-get -y install binutils libproj-dev gdal-bin postgresql-client python3-lxml
+RUN apt-get -y install libmemcached-dev
 
 # Set environment variables
 ENV PYTHONUNBUFFERED 1 \
@@ -30,3 +23,5 @@ WORKDIR /code
 COPY . /code/
 
 EXPOSE 8000
+
+RUN adduser --disabled-password --gecos '' myuser
