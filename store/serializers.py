@@ -19,3 +19,4 @@ class POISerializer(GeoFeatureModelSerializer):
         model = PointoOfInterest
         fields = "__all__"
         geo_field = "geom"
+        read_only_fields = ["distance"]

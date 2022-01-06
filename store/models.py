@@ -14,13 +14,13 @@ class Store(models.Model):
     coordinate = models.PointField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = "store_table"
 
 
 class PointoOfInterest(models.Model):
     """
-    A model which holds information about a POI from Google maps LookupS
+    A model which holds information about a POI from Google maps Lookup
     """
 
     id = models.AutoField(primary_key=True)
@@ -32,5 +32,5 @@ class PointoOfInterest(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = "poi_table"
