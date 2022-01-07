@@ -9,6 +9,8 @@ RUN apt-get -y install libmemcached-dev
 ENV PYTHONUNBUFFERED 1 \
     PYTHONIOENCODING=UTF-8
 
+ENV ggl_place_key=AIzaSyBnndrLxH443KsAD1w2gviA-crDj1CDjp8
+
 
 COPY requirements.txt /requirements.txt
 
