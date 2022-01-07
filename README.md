@@ -70,7 +70,7 @@ As an additional step, it might be useful to delete the migrations files on the 
 
 #### Env Variables
 
-As the application use Google Place API, a token is required. This key can be setup in your local enviroment using:
+As the application use Google Place API, a token is required. This key can be setup in your local environment using:
 
 ```
 export ggl_place_key={SECRET_KEY}
@@ -110,9 +110,97 @@ curl --header "Content-Type: application/json" \
 }
 ```
 
+**Result POST**
+
+```
+{
+    "status": 1,
+    "responseCode": 200,
+    "data": [
+        {
+            "id": 1,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.1957362,
+                    -33.8670522
+                ]
+            },
+            "properties": {
+                "name": "La Tienda 2",
+                "address": "Steinfurter str. 2",
+                "city": "Berlin",
+                "postcode": 49562
+            }
+        },
+        [
+            {
+                "name": "Sydney",
+                "bussines_status": "No Data",
+                "rate": "No Data",
+                "type": [
+                    [
+                        "colloquial_area",
+                        "locality",
+                        "political"
+                    ]
+                ],
+                "location": "POINT (151.2092955 -33.8688197)"
+            }
+            ...
+```
+
+**POI api**
+
+```
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 1,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.2092955,
+                    -33.8688197
+                ]
+            },
+            "properties": {
+                "name": "Sydney",
+                "bussines_status": "No Data",
+                "rate": "No Data",
+                "type": "(['colloquial_area', 'locality', 'political'],)",
+                "distance": "1269.83",
+                "store": 1
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.1958561,
+                    -33.866489
+                ]
+            },
+            "properties": {
+                "name": "Google Workplace 6",
+                "bussines_status": "No Data",
+                "rate": "No Data",
+                "type": "(['point_of_interest', 'establishment'],)",
+                "distance": "63.45",
+                "store": 1
+            }
+        }
+        ....
+```
+
 ## Test
 
-To run some test just excecute:
+To run some test just execute:
 
 ```
 docker-compose exec web python manage.py test
