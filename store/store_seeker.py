@@ -14,7 +14,6 @@ class POILookUp:
         longitude = coords[0]
         radius = 100
         secret_key = os.getenv("ggl_place_key")  # secret key
-        print(secret_key)
         url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={latitude},{longitude}&radius={radius}&key={secret_key}"
         payload = {}
         headers = {}

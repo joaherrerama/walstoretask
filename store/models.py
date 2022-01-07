@@ -11,7 +11,7 @@ class Store(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     postcode = models.IntegerField()
-    coordinate = models.PointField()
+    geom = models.PointField()
 
     class Meta:
         managed = True
@@ -28,7 +28,8 @@ class PointoOfInterest(models.Model):
     bussines_status = models.CharField(max_length=255)
     rate = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
-    location = models.PointField()
+    geom = models.PointField()
+    distance = models.DecimalField(max_digits=10, decimal_places=2)
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
 
     class Meta:

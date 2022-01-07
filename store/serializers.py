@@ -1,4 +1,3 @@
-from rest_framework import serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from .models import PointoOfInterest, Store
@@ -12,9 +11,6 @@ class StoreSerializer(GeoFeatureModelSerializer):
 
 
 class POISerializer(GeoFeatureModelSerializer):
-
-    distance = serializers.CharField()
-
     class Meta:
         model = PointoOfInterest
         fields = "__all__"

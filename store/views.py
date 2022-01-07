@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from .models import PointoOfInterest, Store
@@ -27,7 +27,7 @@ class StoreViewSet(viewsets.ModelViewSet):
             address=data["address"],
             city=data["city"],
             postcode=data["postcode"],
-            coordinate=data["coordinate"],
+            geom=data["geom"],
         )
 
         new_store.save()
@@ -36,24 +36,34 @@ class StoreViewSet(viewsets.ModelViewSet):
 
         # Looking Up Code
 
-        poi_list = POILookUp.get_nearby_poi(data["coordinate"])
-
+        poi_list = POILookUp.get_nearby_poi(data["geom"])
+        poi_serials = []
+        store_id = Store.objects.only("id").get(id=new_store.id)
         for poi in poi_list:
             new_poi = PointoOfInterest.objects.create(
                 name=poi["name"],
                 bussines_status=poi["bussines_status"],
                 rate=poi["rate"],
                 type=poi["type"],
-                location=poi["location"],
-                store=new_store.id,
-                distance=POILookUp.get_distance(data["coordinate"], poi["location"]),
+                geom=poi["location"],
+                store=store_id,
+                distance=POILookUp.get_distance(data["geom"], poi["location"]),
             )
 
             new_poi.save()
 
-            POISerializer(new_poi)
+            poi_serializer = POISerializer(new_poi)
 
-        return Response(serializer.data)
+            poi_serials.append(poi_serializer.data)
+
+        Serializer_list = [serializer.data, poi_list]
+
+        content = {
+            "status": 1,
+            "responseCode": status.HTTP_200_OK,
+            "data": Serializer_list,
+        }
+        return Response(content)
 
 
 class PoiViewSet(viewsets.ModelViewSet):
