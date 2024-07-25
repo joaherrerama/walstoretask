@@ -11,7 +11,6 @@ ENV PYTHONUNBUFFERED 1 \
 
 ENV ggl_place_key={SECRETKEY}
 
-
 COPY requirements.txt /requirements.txt
 
 # Install dependencies.
